@@ -1,3 +1,8 @@
+'''
+Finding a Most Likely Common Ancestor
+http://rosalind.info/problems/cons/
+'''
+
 from functools import partial
 from operator import is_not
 import numpy as np
