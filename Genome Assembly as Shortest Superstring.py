@@ -36,19 +36,6 @@ def max_overlap(s1,s2):
             p=ml-k
             break
     return p
-
-
-DNA_list_join=join_string(DNA_list)
-
-# заполнение матрицы смежности
-
-agj_matrix=[[0]*(len(DNA_list_join)//2) for i in range(len(DNA_list_join)//2)]
-
-for num1, elem1 in enumerate(DNA_list_join):
-    if elem1.isalnum():
-        for num2, elem2 in enumerate(DNA_list_join):
-            if elem2.isalnum() and elem1!=elem2:
-                agj_matrix[num1//2][num2//2]=max_overlap(elem1,elem2)
            
 def gluing(s1,s2):
     p=max_overlap(s1,s2)
@@ -75,6 +62,17 @@ def recurse2(id,k,M):
         id=M[id]
     return J
 
+DNA_list_join=join_string(DNA_list)
+
+# заполнение матрицы смежности
+
+agj_matrix=[[0]*(len(DNA_list_join)//2) for i in range(len(DNA_list_join)//2)]
+
+for num1, elem1 in enumerate(DNA_list_join):
+    if elem1.isalnum():
+        for num2, elem2 in enumerate(DNA_list_join):
+            if elem2.isalnum() and elem1!=elem2:
+                agj_matrix[num1//2][num2//2]=max_overlap(elem1,elem2)
 M=[0]*(len(DNA_list_join)//2)
 agj_matrix_np=np.array(agj_matrix)
 
@@ -121,8 +119,6 @@ for id, elem in enumerate(K_unic):
     if type(elem) == list:
         U.append(list(G[t][len(elem)-2] for t in elem))
     else: U.append(elem)
-
-#FINAL!!!!!!!!!!
 
 STRING_FOR_GLUING=list(map(lambda x: min(x, key =lambda x: len((x))) if type(x)==list else x ,U))
 
