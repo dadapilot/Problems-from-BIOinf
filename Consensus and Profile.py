@@ -21,6 +21,9 @@ def join_string(L):
                 M[len(M)-1]=M[len(M)-1]+elem
             else: M.append(elem)
     return list(filter(partial(is_not, None), M))
+def cons(nplst):
+    j=np.where(nplst == np.max(nplst))
+    return int(np.array(j[0][0], dtype=np.float))
 
 DNA_list_join=join_string(DNA_list)
 
@@ -37,14 +40,9 @@ print(DNA_list_join)
 profile_matr=[[0]*(len(DNA_list_join[1,:])+1) for _ in range(4)]
 l=['A','C','G','T']
 
-
 for i in range(4):
     for j in range(len(DNA_list_join[0,:])):
         profile_matr[i][j]=DNA_list_join[:,j].tolist().count(l[i])
-
-def cons(nplst):
-    j=np.where(nplst == np.max(nplst))
-    return int(np.array(j[0][0], dtype=np.float))
 
 profile_matr=np.array(profile_matr)
 
@@ -54,10 +52,6 @@ for i in range(len(DNA_list_join[1,:])+1):
     Consensus+=l[k]
 
 L=['A:','C:','G:','T:']
-#profile_matr= np.insert(profile_matr, 0, L, axis=1)
-#profile_matr=np.column_stack((profile_matr, L))
-print(Consensus)
-
 
 for i in range(4):
     print(L[i],*profile_matr[i,:])
